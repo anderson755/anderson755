@@ -1,7 +1,7 @@
 ### Hi there 👋
 # proyecto 
 [proyecto modelo identidad relacion MYSQL](https://user-images.githubusercontent.com/87336816/126179185-90ca1c47-7f18-46d5-b372-a2dc352e8a31.png)
-[dibujos de interfaz grafica proyecto final Mysql]()
+[dibujos de interfaz grafica proyecto final Mysql](https://wireframepro.mockflow.com/view/M746f0288d282080d5fe07a8ba0834f8d1626902173678)
 
 -- MySQL Workbench Forward Engineering
 
