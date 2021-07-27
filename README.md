@@ -10,7 +10,7 @@
 [dibujos de interfaz grafica proyecto final Mysql](https://wireframepro.mockflow.com/view/M746f0288d282080d5fe07a8ba0834f8d1626902173678)
  phpMyAdmin SQL Dump
 -- version 4.9.5
--- https://www.phpmyadmin.net/
+-- 
 --
 -- Servidor: localhost:3306
 -- Tiempo de generación: 27-07-2021 a las 22:44:40
