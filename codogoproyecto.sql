@@ -1,224 +1,299 @@
--- MySQL Workbench Forward Engineering
+-- phpMyAdmin SQL Dump
+-- version 4.9.5
+--
+--
+-- Servidor: localhost:3306
+-- Tiempo de generación: 27-07-2021 a las 22:44:40
+-- Versión del servidor: 10.3.16-MariaDB
+-- Versión de PHP: 7.3.23
 
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
-
--- -----------------------------------------------------
--- Schema zoologicoo
--- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Schema zoologicoo
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `zoologicoo` DEFAULT CHARACTER SET utf8 ;
-USE `zoologicoo` ;
-
--- -----------------------------------------------------
--- Table `zoologicoo`.`Cuidadores`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `zoologicoo`.`Cuidadores` (
-  `idCuidadores` INT NOT NULL,
-  `nombre` VARCHAR(45) NOT NULL,
-  `dirección` VARCHAR(45) NOT NULL,
-  `telefono` VARCHAR(45) NOT NULL,
-  `fecha_ingreso_parque` VARCHAR(45) NOT NULL,
-  `fecha_ en_ la _que _un _cuidador _se_ hace_ cargo _de_ una _especie.` VARCHAR(45) NOT NULL,
-  `un _cuidador_ puede_ estar_ a _cargo_ de_ varias_ especies` VARCHAR(45) NOT NULL,
-  `sexo_cuidador` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idCuidadores`))
-ENGINE = InnoDB;
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
 
 
--- -----------------------------------------------------
--- Table `zoologicoo`.`especies`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `zoologicoo`.`especies` (
-  `idespecies` INT NOT NULL,
-  `nombre` VARCHAR(45) NOT NULL,
-  `nombre_cientifico` VARCHAR(45) NOT NULL,
-  `descripcion_general` VARCHAR(45) NOT NULL,
-  `habitat_natural` VARCHAR(45) NOT NULL,
-  `Cuidadores_idCuidadores` INT NOT NULL,
-  `sexo_especie` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idespecies`),
-  INDEX `fk_especies_Cuidadores1_idx` (`Cuidadores_idCuidadores` ASC) VISIBLE,
-  CONSTRAINT `fk_especies_Cuidadores1`
-    FOREIGN KEY (`Cuidadores_idCuidadores`)
-    REFERENCES `zoologicoo`.`Cuidadores` (`idCuidadores`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
+--
+-- Base de datos: `id17320712_zoologico`
+--
 
--- -----------------------------------------------------
--- Table `zoologicoo`.`Hábitats`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `zoologicoo`.`Hábitats` (
-  `idHábitats` INT NOT NULL,
-  `nombre_habitat` VARCHAR(45) NOT NULL,
-  `clima` VARCHAR(45) NOT NULL,
-  `vegetacion` VARCHAR(45) NOT NULL,
-  `predominantes` VARCHAR(45) NOT NULL,
-  `continentes` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idHábitats`))
-ENGINE = InnoDB;
+-- --------------------------------------------------------
 
+--
+-- Estructura de tabla para la tabla `Cuidadores`
+--
 
--- -----------------------------------------------------
--- Table `zoologicoo`.`zona`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `zoologicoo`.`zona` (
-  `idzona` INT NOT NULL,
-  `nombre_zona` VARCHAR(45) NOT NULL,
-  `extencion_ocupa` VARCHAR(45) NOT NULL,
-  `el_zoologico` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idzona`))
-ENGINE = InnoDB;
+CREATE TABLE `Cuidadores` (
+  `idCuidadores` int(11) NOT NULL,
+  `nombre` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `dirección` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `telefono` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `fecha_ingreso_parque` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `fechacuidadorespecies` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `cuidadorespecies` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `sexo_cuidador` varchar(45) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+-- --------------------------------------------------------
 
--- -----------------------------------------------------
--- Table `zoologicoo`.`Itinerarios`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `zoologicoo`.`Itinerarios` (
-  `idItinerarios` INT NOT NULL,
-  `codigode_Itinerario` VARCHAR(45) NOT NULL,
-  `duración _recorrido` VARCHAR(45) NOT NULL,
-  `longitud_itinerario` VARCHAR(45) NOT NULL,
-  `máximo_ número_ de_ visitantes_ autorizado` VARCHAR(45) NOT NULL,
-  `número_ de_ distintas _especies_ que _visita` VARCHAR(45) NOT NULL,
-  `recorrido_de_zonas_del_parque` VARCHAR(45) NOT NULL,
-  `una_ zona_ puede_ ser_ recorrida _por _diferentes _itinerarios` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idItinerarios`))
-ENGINE = InnoDB;
+--
+-- Estructura de tabla para la tabla `especies`
+--
 
+CREATE TABLE `especies` (
+  `idespecies` int(11) NOT NULL,
+  `nombre` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `nombre_cientifico` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `descripcion_general` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `habitat_natural` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `Cuidadores_idCuidadores` int(11) NOT NULL,
+  `sexo_especie` varchar(45) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- -----------------------------------------------------
--- Table `zoologicoo`.`Guías`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `zoologicoo`.`Guías` (
-  `idGuías` INT NOT NULL,
-  `nombre` VARCHAR(45) NOT NULL,
-  `dirrecion` VARCHAR(45) NOT NULL,
-  `telefono` VARCHAR(45) NOT NULL,
-  `fecha_inicio_trabajo` DATE NOT NULL,
-  `guias_itinerarios` DATE NOT NULL,
-  `guia_hora_asignado_itinerario` DATE NOT NULL,
-  `sexo_guia` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idGuías`))
-ENGINE = InnoDB;
+-- --------------------------------------------------------
 
+--
+-- Estructura de tabla para la tabla `especies_has_Hábitats`
+--
 
--- -----------------------------------------------------
--- Table `zoologicoo`.`especies_has_zona`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `zoologicoo`.`especies_has_zona` (
-  `especies_idespecies` INT NOT NULL,
-  `zona_idzona` INT NOT NULL,
-  PRIMARY KEY (`especies_idespecies`, `zona_idzona`),
-  INDEX `fk_especies_has_zona_zona1_idx` (`zona_idzona` ASC) VISIBLE,
-  INDEX `fk_especies_has_zona_especies_idx` (`especies_idespecies` ASC) VISIBLE,
-  CONSTRAINT `fk_especies_has_zona_especies`
-    FOREIGN KEY (`especies_idespecies`)
-    REFERENCES `zoologicoo`.`especies` (`idespecies`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_especies_has_zona_zona1`
-    FOREIGN KEY (`zona_idzona`)
-    REFERENCES `zoologicoo`.`zona` (`idzona`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+CREATE TABLE `especies_has_Hábitats` (
+  `especies_idespecies` int(11) NOT NULL,
+  `Hábitats_idHábitats` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+-- --------------------------------------------------------
 
--- -----------------------------------------------------
--- Table `zoologicoo`.`Guías_has_Itinerarios`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `zoologicoo`.`Guías_has_Itinerarios` (
-  `Guías_idGuías` INT NOT NULL,
-  `Itinerarios_idItinerarios` INT NOT NULL,
-  PRIMARY KEY (`Guías_idGuías`, `Itinerarios_idItinerarios`),
-  INDEX `fk_Guías_has_Itinerarios_Itinerarios1_idx` (`Itinerarios_idItinerarios` ASC) VISIBLE,
-  INDEX `fk_Guías_has_Itinerarios_Guías1_idx` (`Guías_idGuías` ASC) VISIBLE,
-  CONSTRAINT `fk_Guías_has_Itinerarios_Guías1`
-    FOREIGN KEY (`Guías_idGuías`)
-    REFERENCES `zoologicoo`.`Guías` (`idGuías`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Guías_has_Itinerarios_Itinerarios1`
-    FOREIGN KEY (`Itinerarios_idItinerarios`)
-    REFERENCES `zoologicoo`.`Itinerarios` (`idItinerarios`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+--
+-- Estructura de tabla para la tabla `especies_has_zona`
+--
 
+CREATE TABLE `especies_has_zona` (
+  `especies_idespecies` int(11) NOT NULL,
+  `zona_idzona` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- -----------------------------------------------------
--- Table `zoologicoo`.`especies_has_Hábitats`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `zoologicoo`.`especies_has_Hábitats` (
-  `especies_idespecies` INT NOT NULL,
-  `Hábitats_idHábitats` INT NOT NULL,
-  PRIMARY KEY (`especies_idespecies`, `Hábitats_idHábitats`),
-  INDEX `fk_especies_has_Hábitats_Hábitats1_idx` (`Hábitats_idHábitats` ASC) VISIBLE,
-  INDEX `fk_especies_has_Hábitats_especies1_idx` (`especies_idespecies` ASC) VISIBLE,
-  CONSTRAINT `fk_especies_has_Hábitats_especies1`
-    FOREIGN KEY (`especies_idespecies`)
-    REFERENCES `zoologicoo`.`especies` (`idespecies`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_especies_has_Hábitats_Hábitats1`
-    FOREIGN KEY (`Hábitats_idHábitats`)
-    REFERENCES `zoologicoo`.`Hábitats` (`idHábitats`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- --------------------------------------------------------
 
+--
+-- Estructura de tabla para la tabla `Guías`
+--
 
--- -----------------------------------------------------
--- Table `zoologicoo`.`Hábitats_has_especies`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `zoologicoo`.`Hábitats_has_especies` (
-  `Hábitats_idHábitats` INT NOT NULL,
-  `especies_idespecies` INT NOT NULL,
-  PRIMARY KEY (`Hábitats_idHábitats`, `especies_idespecies`),
-  INDEX `fk_Hábitats_has_especies_especies1_idx` (`especies_idespecies` ASC) VISIBLE,
-  INDEX `fk_Hábitats_has_especies_Hábitats1_idx` (`Hábitats_idHábitats` ASC) VISIBLE,
-  CONSTRAINT `fk_Hábitats_has_especies_Hábitats1`
-    FOREIGN KEY (`Hábitats_idHábitats`)
-    REFERENCES `zoologicoo`.`Hábitats` (`idHábitats`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Hábitats_has_especies_especies1`
-    FOREIGN KEY (`especies_idespecies`)
-    REFERENCES `zoologicoo`.`especies` (`idespecies`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+CREATE TABLE `Guías` (
+  `idGuías` int(11) NOT NULL,
+  `nombre` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `dirrecion` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `telefono` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `fecha_inicio_trabajo` date NOT NULL,
+  `guias_itinerarios` date NOT NULL,
+  `guia_hora_asignado_itinerario` date NOT NULL,
+  `sexo_guia` varchar(45) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+-- --------------------------------------------------------
 
--- -----------------------------------------------------
--- Table `zoologicoo`.`zona_has_Itinerarios`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `zoologicoo`.`zona_has_Itinerarios` (
-  `zona_idzona` INT NOT NULL,
-  `Itinerarios_idItinerarios` INT NOT NULL,
-  PRIMARY KEY (`zona_idzona`, `Itinerarios_idItinerarios`),
-  INDEX `fk_zona_has_Itinerarios_Itinerarios1_idx` (`Itinerarios_idItinerarios` ASC) VISIBLE,
-  INDEX `fk_zona_has_Itinerarios_zona1_idx` (`zona_idzona` ASC) VISIBLE,
-  CONSTRAINT `fk_zona_has_Itinerarios_zona1`
-    FOREIGN KEY (`zona_idzona`)
-    REFERENCES `zoologicoo`.`zona` (`idzona`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_zona_has_Itinerarios_Itinerarios1`
-    FOREIGN KEY (`Itinerarios_idItinerarios`)
-    REFERENCES `zoologicoo`.`Itinerarios` (`idItinerarios`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+--
+-- Estructura de tabla para la tabla `Guías_has_Itinerarios`
+--
 
+CREATE TABLE `Guías_has_Itinerarios` (
+  `Guías_idGuías` int(11) NOT NULL,
+  `Itinerarios_idItinerarios` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `Hábitats`
+--
+
+CREATE TABLE `Hábitats` (
+  `idHábitats` int(11) NOT NULL,
+  `nombre_habitat` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `clima` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `vegetacion` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `predominantes` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `continentes` varchar(45) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `Hábitats_has_especies`
+--
+
+CREATE TABLE `Hábitats_has_especies` (
+  `Hábitats_idHábitats` int(11) NOT NULL,
+  `especies_idespecies` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `Itinerarios`
+--
+
+CREATE TABLE `Itinerarios` (
+  `idItinerarios` int(11) NOT NULL,
+  `codigode_Itinerario` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `duración _recorrido` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `longitud_itinerario` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `maxvicitante` int(11) NOT NULL,
+  `numvicitaespecies` int(11) NOT NULL,
+  `recorrido_de_zonas_del_parque` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `zonarecorrida` varchar(45) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `zona`
+--
+
+CREATE TABLE `zona` (
+  `idzona` int(11) NOT NULL,
+  `nombre_zona` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `extencion_ocupa` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `el_zoologico` varchar(45) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `zona_has_Itinerarios`
+--
+
+CREATE TABLE `zona_has_Itinerarios` (
+  `zona_idzona` int(11) NOT NULL,
+  `Itinerarios_idItinerarios` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `Cuidadores`
+--
+ALTER TABLE `Cuidadores`
+  ADD PRIMARY KEY (`idCuidadores`);
+
+--
+-- Indices de la tabla `especies`
+--
+ALTER TABLE `especies`
+  ADD PRIMARY KEY (`idespecies`),
+  ADD KEY `fk_especies_Cuidadores1` (`Cuidadores_idCuidadores`);
+
+--
+-- Indices de la tabla `especies_has_Hábitats`
+--
+ALTER TABLE `especies_has_Hábitats`
+  ADD PRIMARY KEY (`especies_idespecies`,`Hábitats_idHábitats`),
+  ADD KEY `fk_especies_has_Hábitats_Hábitats1` (`Hábitats_idHábitats`);
+
+--
+-- Indices de la tabla `especies_has_zona`
+--
+ALTER TABLE `especies_has_zona`
+  ADD PRIMARY KEY (`especies_idespecies`,`zona_idzona`),
+  ADD KEY `fk_especies_has_zona_zona1` (`zona_idzona`);
+
+--
+-- Indices de la tabla `Guías`
+--
+ALTER TABLE `Guías`
+  ADD PRIMARY KEY (`idGuías`);
+
+--
+-- Indices de la tabla `Guías_has_Itinerarios`
+--
+ALTER TABLE `Guías_has_Itinerarios`
+  ADD PRIMARY KEY (`Guías_idGuías`,`Itinerarios_idItinerarios`),
+  ADD KEY `fk_Guías_has_Itinerarios_Itinerarios1` (`Itinerarios_idItinerarios`);
+
+--
+-- Indices de la tabla `Hábitats`
+--
+ALTER TABLE `Hábitats`
+  ADD PRIMARY KEY (`idHábitats`);
+
+--
+-- Indices de la tabla `Hábitats_has_especies`
+--
+ALTER TABLE `Hábitats_has_especies`
+  ADD PRIMARY KEY (`Hábitats_idHábitats`,`especies_idespecies`),
+  ADD KEY `fk_Hábitats_has_especies_especies1` (`especies_idespecies`);
+
+--
+-- Indices de la tabla `Itinerarios`
+--
+ALTER TABLE `Itinerarios`
+  ADD PRIMARY KEY (`idItinerarios`);
+
+--
+-- Indices de la tabla `zona`
+--
+ALTER TABLE `zona`
+  ADD PRIMARY KEY (`idzona`);
+
+--
+-- Indices de la tabla `zona_has_Itinerarios`
+--
+ALTER TABLE `zona_has_Itinerarios`
+  ADD PRIMARY KEY (`zona_idzona`,`Itinerarios_idItinerarios`),
+  ADD KEY `fk_zona_has_Itinerarios_Itinerarios1` (`Itinerarios_idItinerarios`);
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `especies`
+--
+ALTER TABLE `especies`
+  ADD CONSTRAINT `fk_especies_Cuidadores1` FOREIGN KEY (`Cuidadores_idCuidadores`) REFERENCES `Cuidadores` (`idCuidadores`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `especies_has_Hábitats`
+--
+ALTER TABLE `especies_has_Hábitats`
+  ADD CONSTRAINT `fk_especies_has_Hábitats_Hábitats1` FOREIGN KEY (`Hábitats_idHábitats`) REFERENCES `Hábitats` (`idHábitats`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_especies_has_Hábitats_especies1` FOREIGN KEY (`especies_idespecies`) REFERENCES `especies` (`idespecies`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `especies_has_zona`
+--
+ALTER TABLE `especies_has_zona`
+  ADD CONSTRAINT `fk_especies_has_zona_especies` FOREIGN KEY (`especies_idespecies`) REFERENCES `especies` (`idespecies`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_especies_has_zona_zona1` FOREIGN KEY (`zona_idzona`) REFERENCES `zona` (`idzona`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `Guías_has_Itinerarios`
+--
+ALTER TABLE `Guías_has_Itinerarios`
+  ADD CONSTRAINT `fk_Guías_has_Itinerarios_Guías1` FOREIGN KEY (`Guías_idGuías`) REFERENCES `Guías` (`idGuías`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_Guías_has_Itinerarios_Itinerarios1` FOREIGN KEY (`Itinerarios_idItinerarios`) REFERENCES `Itinerarios` (`idItinerarios`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `Hábitats_has_especies`
+--
+ALTER TABLE `Hábitats_has_especies`
+  ADD CONSTRAINT `fk_Hábitats_has_especies_Hábitats1` FOREIGN KEY (`Hábitats_idHábitats`) REFERENCES `Hábitats` (`idHábitats`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_Hábitats_has_especies_especies1` FOREIGN KEY (`especies_idespecies`) REFERENCES `especies` (`idespecies`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `zona_has_Itinerarios`
+--
+ALTER TABLE `zona_has_Itinerarios`
+  ADD CONSTRAINT `fk_zona_has_Itinerarios_Itinerarios1` FOREIGN KEY (`Itinerarios_idItinerarios`) REFERENCES `Itinerarios` (`idItinerarios`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_zona_has_Itinerarios_zona1` FOREIGN KEY (`zona_idzona`) REFERENCES `zona` (`idzona`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
